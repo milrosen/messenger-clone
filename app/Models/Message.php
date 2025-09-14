@@ -11,10 +11,14 @@ class Message extends Model
     use HasFactory;
 
     public $table = 'messages';
-    protected $fillable = ['id', 'user_id', 'text'];
-
+    protected $fillable = ['id', 'user_id', 'conversation_id', 'text'];
+    
     public function user(): BelongsTo {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function conversation(): BelongsTo {
+        return $this->belongsTo(Conversation::class, 'conversation_id');
     }
     
     public function getTimeAttribute(): string {
